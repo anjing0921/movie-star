@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import BottomNav from './components/BottomNav';
 
 function App() {
+
   return (
     <div className="App">
-      <p>hello</p>
+      <BottomNav />
     </div>
   );
 }
