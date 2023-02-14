@@ -12,7 +12,7 @@ const BottomNav = () => {
     const [value, setValue] = useState(0);
     
     return (
-        <Box sx={{width: 500, position:"fixed", bottom:0, zIndex:100}}>
+        <Box sx={{width: "100%", position:"fixed", bottom:0, zIndex:100}}>
             <BottomNavigation
                 value = {value}
                 onChange = {(e, newValue)=>{ setValue(newValue)}}
