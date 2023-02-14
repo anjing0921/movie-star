@@ -2,7 +2,7 @@ import './App.css';
 import BottomNav from './components/BottomNav';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from './components/Header/Header';
-import { Container } from "@material-ui/core";
+import { Container } from '@mui/material'
 import Trending from './Pages/Trending/Trending';
 import Movies from './Pages/Movies/Movies'
 import Search from './Pages/Search/Search'
@@ -30,10 +30,6 @@ function App() {
       <BottomNav />
     </BrowserRouter>
     </>
-
-    // <div className="App">
-    //   <BottomNav />
-    // </div>
   );
 }
 
