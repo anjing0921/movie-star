@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
-import LoginButton from "../../Pages/Login/LoginButton";
-import LogoutButton from "../../Pages/Login/LogoutButton";
+import LoginButton from './LoginButton' ;
+import LogoutButton from './LogoutButton';
 
 const Header = () => {
   return (
