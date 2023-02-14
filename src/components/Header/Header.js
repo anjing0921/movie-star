@@ -6,10 +6,11 @@ import LoginButton from "../../Pages/Login/LoginButton";
 const Header = () => {
   return (
     <>
-      <span className="header">🎬 Entertainment Hub 🎥</span>
-      <div>
+      <span className="header">⭐ Movie Stars ⭐</span>
+      <span >
+        <LogoutButton/>
         <LoginButton />
-      </div>
+      </span>
     </>
   );
 };
