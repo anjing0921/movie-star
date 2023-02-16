@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
-import GenreButton from "../../components/GenreButton"
+//import GenreButton from "../../components/GenreButton"
 
 import CustomPagination from "../../components/Pagination/CustomPagination";
 
