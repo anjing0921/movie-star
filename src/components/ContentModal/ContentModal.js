@@ -87,8 +87,7 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
                     {content.first_air_date ||
                       content.release_date ||
                       "-----"}
-                    ) 
-                  {content.id}
+                    )
                   </span> 
               
                   <span className="ContentModal__description">
