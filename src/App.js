@@ -9,7 +9,7 @@ import Search from "./Pages/Search/Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Watchlist from "./components/Watchkist";
-//import Series from './Pages/Series/Series'
+import Login from "./Pages/Login/Login"
 
 function App() {
   const [trendingContent, setTrendingContent] = useState([]);
@@ -70,7 +70,12 @@ function App() {
                   />
                 }
               />
-              <Route path="/movies" element={<Movies />} />
+              <Route
+                path="/movies"
+                element={<Movies moviesContent={moviesContent} watchlist={watchlist}
+              setWatchList={setWatchList}/>}
+            />
+              <Route path="/login" element={<Login />} />
               <Route
                 path="/list"
                 element={
