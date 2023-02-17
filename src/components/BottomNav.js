@@ -6,8 +6,9 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
 import SearchIcon from '@mui/icons-material/Search';
+import ListIcon from '@mui/icons-material/List';
+import LoginIcon from '@mui/icons-material/Login';
 
 const BottomNav = () => {
     const [value, setValue] = useState(0);
@@ -19,11 +20,13 @@ const BottomNav = () => {
       } else if (value === 1) {
         navigate("/movies");
       } else if (value === 2) {
-        navigate("/series");
+        navigate("/login");
       } else if (value === 3) {
         navigate("/search");
+      } else if (value === 4) {
+        navigate("/list");
       }
-      }, [value, navigate]);
+    },[value, navigate]);
     
     return (
         <Box sx={{width: "100%", position:"fixed", bottom:0, zIndex:100}}>
@@ -34,8 +37,9 @@ const BottomNav = () => {
             >
                 <BottomNavigationAction label="Trending" icon={<WhatshotIcon />} />
                 <BottomNavigationAction label="Movies" icon={<MovieFilterIcon />} />
-                <BottomNavigationAction label="TV series" icon={<LiveTvIcon />} />
+                <BottomNavigationAction label="Login" icon={<LoginIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
+                <BottomNavigationAction label="WatchList" icon={<ListIcon />} />
             </BottomNavigation>    
         </Box>
     )
