@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Watchlist from "./components/Watchkist";
 import Login from "./Pages/Login/Login"
+import AuthPage from "./Pages/Auth/AuthPage";
 
 function App() {
   const [trendingContent, setTrendingContent] = useState([]);
@@ -76,6 +77,7 @@ function App() {
               setWatchList={setWatchList}/>}
             />
               <Route path="/login" element={<Login />} />
+              <Route path="/auth" element={<AuthPage />}/>
               <Route
                 path="/list"
                 element={

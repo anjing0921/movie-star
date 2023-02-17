@@ -25,6 +25,8 @@ const BottomNav = () => {
         navigate("/search");
       } else if (value === 4) {
         navigate("/list");
+      }else if (value === 5) {
+        navigate("/auth");
       }
     },[value, navigate]);
     
@@ -40,6 +42,7 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Login" icon={<LoginIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
                 <BottomNavigationAction label="WatchList" icon={<ListIcon />} />
+                <BottomNavigationAction label="Auth" icon={<LoginIcon />} />
             </BottomNavigation>    
         </Box>
     )
