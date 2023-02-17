@@ -2,9 +2,6 @@ import { useState, useRef } from 'react';
 import classes from './AuthForm.module.css';
 import axios from 'axios'
 
-// const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
-// const API_KEY=process.env.REACT_APP_FIREBASE_API_KEY;
-
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +12,7 @@ const AuthForm = () => {
         return axios.get(url, parameter)
         .then((res) => {
             setIsLoading(false)
-            return res.data;
+            return res;
         })
         .then((data) => {
             console.log(data);
