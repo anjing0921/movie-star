@@ -6,7 +6,6 @@ const MovieCard = ({movie}) => {
   
   return (
     <>
-    <div>MovieCard</div>
     <div className="movie-card">
       <div className="overlay"></div>
       <img
