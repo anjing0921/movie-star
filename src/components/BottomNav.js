@@ -9,6 +9,7 @@ import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import SearchIcon from '@mui/icons-material/Search';
 import ListIcon from '@mui/icons-material/List';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const BottomNav = () => {
     const authCtx = useContext(AuthContext);
@@ -44,6 +45,8 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} />)}
                 <BottomNavigationAction label="Auth" icon={<LoginIcon />} />
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} />)}
+
             </BottomNavigation>    
         </Box>
     )
