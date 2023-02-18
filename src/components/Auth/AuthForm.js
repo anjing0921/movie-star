@@ -5,38 +5,40 @@ import axios from 'axios'
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedViewer, setSelectedViewer] = useState('')
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const nameInputRef = useRef();
     
     const login = (url, parameter) => {
-        return axios.get(url, parameter)
+        return axios.get(url, {params:parameter})
         .then((res) => {
             setIsLoading(false)
-            return res;
+            return res.data;
         })
         .then((data) => {
             console.log(data);
+            setSelectedViewer(data.name)
         })
         .catch((err) => {
             setIsLoading(false)
-            console.log(err.message)
+            alert(err.response.data.details)
         }); 
     }
 
     const signUp = (url, parameter) => {
+        console.log(url,parameter)
         return axios.post(url, parameter)
         .then((res) => {
             setIsLoading(false)
-            return res;
+            return res.data;
         })
         .then((data) => {
             console.log(data);
         })
         .catch((err) => {
             setIsLoading(false)
-            console.log(err)
-            let error = 'Account already exists.'
-            alert(error);
+            alert(err.response.data.details);
         }); 
     }
 
@@ -44,7 +46,8 @@ const AuthForm = () => {
         event.preventDefault();
         setIsLoading(true);
         let url = 'https://movie-star-back-end.herokuapp.com/viewers';
-        
+
+        const enteredName = nameInputRef.current.value;
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
@@ -52,8 +55,9 @@ const AuthForm = () => {
             login(url, { email: enteredEmail})
         } else {
             signUp(url,{
+                name: enteredName,
                 email: enteredEmail,
-                name: enteredPassword
+                password: enteredPassword
         })        
     }
 }
@@ -64,7 +68,13 @@ const AuthForm = () => {
     return (
     <section className={classes.auth}>
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+        <h2>{!isLogin ? {selectedViewer} : `nobody`}</h2>
         <form onSubmit={submitHandler}>
+            {!isLogin ?
+            (<div className={classes.control}>
+                <label htmlFor='name'>Your Name</label>
+                <input type='name' id='name' required ref={nameInputRef} />
+            </div>):<></>}
             <div className={classes.control}>
                 <label htmlFor='email'>Your Email</label>
                 <input type='email' id='email' required ref={emailInputRef} />
