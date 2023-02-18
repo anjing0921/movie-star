@@ -2,6 +2,7 @@ import React from 'react'
 import './SingleContent.css'
 import Badge from '@mui/material/Badge';
 import ContentModal from '../ContentModal/ContentModal';
+import Rating from '@mui/material/Rating'
 
 const SingleContent = ({id,
   poster,
@@ -23,6 +24,7 @@ const SingleContent = ({id,
         alt={`${title} Poster`}
       />
       <b className="title">{title}</b>
+      <Rating name="star-rate" value={vote_average / 2 } precision={0.01} readOnly />
       <span className="subTitle">
       {media_type === "tv" ? "TV Series" : "Movie"}
         <span className="subTitle">{date}</span>
