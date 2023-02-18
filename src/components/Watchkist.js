@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
+
 import MovieCard from './MovieCard'
 
 const Watchlist = ({setWatchList, watchlist}) => {
+
+  
   
   return (
     <div className="movie-page">

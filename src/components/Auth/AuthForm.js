@@ -1,26 +1,30 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 import classes from './AuthForm.module.css';
 import axios from 'axios'
 
+const BACK_END_URL = process.env.REACT_APP_BACKEND_URL;
+
 const AuthForm = () => {
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const nameInputRef = useRef();
-    const [logginedId, setLogginedId] = useState(NaN);
 
-    console.log(logginedId);
-    
-    const login = (url, parameter) => {
-        return axios.get(url, {params:parameter})
+    const authCtx = useContext(AuthContext);
+
+    const [isLogin, setIsLogin] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const login = (parameter) => {
+        return axios.get(BACK_END_URL, {params:parameter})
         .then((res) => {
             setIsLoading(false)
             return res.data;
         })
         .then((data) => {
             console.log(data);
-            setLogginedId(data[0].id)
+            authCtx.login(data[0].id)
         })
         .catch((err) => {
             setIsLoading(false)
@@ -28,9 +32,9 @@ const AuthForm = () => {
         }); 
     }
 
-    const signUp = (url, parameter) => {
-        console.log(url,parameter)
-        return axios.post(url, parameter)
+    const signUp = (parameter) => {
+
+        return axios.post(BACK_END_URL, parameter)
         .then((res) => {
             setIsLoading(false)
             return res.data;
@@ -47,17 +51,15 @@ const AuthForm = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         setIsLoading(true);
-        let url = 'https://movie-star-back-end.herokuapp.com/viewers';
-
         
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
         if (isLogin){
-            login(url, { email:enteredEmail})
+            login({ email:enteredEmail})
         } else {
             const enteredName = nameInputRef.current.value;
-            signUp(url,{
+            signUp({
                 name: enteredName,
                 email: enteredEmail,
                 password: enteredPassword

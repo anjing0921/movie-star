@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../store/auth-context';
 import Box from '@mui/material/Box'
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -11,6 +11,7 @@ import ListIcon from '@mui/icons-material/List';
 import LoginIcon from '@mui/icons-material/Login';
 
 const BottomNav = () => {
+    const authCtx = useContext(AuthContext);
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Movies" icon={<MovieFilterIcon />} />
                 <BottomNavigationAction label="Login" icon={<LoginIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                <BottomNavigationAction label="WatchList" icon={<ListIcon />} />
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} />)}
                 <BottomNavigationAction label="Auth" icon={<LoginIcon />} />
             </BottomNavigation>    
         </Box>

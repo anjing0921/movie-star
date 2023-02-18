@@ -6,13 +6,16 @@ import { Container } from "@mui/material";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
 import Search from "./Pages/Search/Search";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Watchlist from "./components/Watchkist";
 import Login from "./Pages/Login/Login"
 import AuthPage from "./Pages/Auth/AuthPage";
+import AuthContext from './store/auth-context';
 
 function App() {
+
+  const authCtx = useContext(AuthContext);
   const [trendingContent, setTrendingContent] = useState([]);
   const [moviesContent, setMoviesContent] = useState([]);
   const [page, setPage] = useState(1);
@@ -78,6 +81,7 @@ function App() {
             />
               <Route path="/login" element={<Login />} />
               <Route path="/auth" element={<AuthPage />}/>
+              {authCtx.isLoggedIn && (
               <Route
                 path="/list"
                 element={
@@ -87,6 +91,7 @@ function App() {
                   />
                 }
               />
+              )}
               <Route
                 path="/search"
                 element={
