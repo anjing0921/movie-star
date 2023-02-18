@@ -5,10 +5,12 @@ import axios from 'axios'
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedViewer, setSelectedViewer] = useState('')
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const nameInputRef = useRef();
+    const [logginedId, setLogginedId] = useState(NaN);
+
+    console.log(logginedId);
     
     const login = (url, parameter) => {
         return axios.get(url, {params:parameter})
@@ -18,7 +20,7 @@ const AuthForm = () => {
         })
         .then((data) => {
             console.log(data);
-            setSelectedViewer(data.name)
+            setLogginedId(data[0].id)
         })
         .catch((err) => {
             setIsLoading(false)
@@ -47,13 +49,14 @@ const AuthForm = () => {
         setIsLoading(true);
         let url = 'https://movie-star-back-end.herokuapp.com/viewers';
 
-        const enteredName = nameInputRef.current.value;
+        
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
         if (isLogin){
-            login(url, { email: enteredEmail})
+            login(url, { email:enteredEmail})
         } else {
+            const enteredName = nameInputRef.current.value;
             signUp(url,{
                 name: enteredName,
                 email: enteredEmail,
@@ -68,7 +71,6 @@ const AuthForm = () => {
     return (
     <section className={classes.auth}>
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-        <h2>{!isLogin ? {selectedViewer} : `nobody`}</h2>
         <form onSubmit={submitHandler}>
             {!isLogin ?
             (<div className={classes.control}>
