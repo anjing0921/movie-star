@@ -13,13 +13,13 @@ const Trending = () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
     );
-    console.log('Trending', data.results);
     setTrendingContent(data.results);
   };
 
   useEffect(() => {
     window.scroll(0, 0);
     fetchTrending();
+    // eslint-disable-next-line
   }, []);
 
   return (
