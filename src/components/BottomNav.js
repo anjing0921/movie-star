@@ -31,14 +31,12 @@ const BottomNav = () => {
         navigate("/list");
       } else if (value === 5) {
         navigate("/auth");
-      } else if (value === 6) {
-        navigate("/logout");
-      }
+      } 
+
     },[value, navigate]);
 
     const logoutHandler = () => {
       authCtx.logout();
-      navigate('/trending', {replace:true})
     }
     
     const WatchlistHandler = () => {

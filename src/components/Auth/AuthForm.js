@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
+import FetchContext from '../../store/fetch-context';
 import classes from './AuthForm.module.css';
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ const AuthForm = () => {
     const nameInputRef = useRef();
 
     const authCtx = useContext(AuthContext);
-    //const navigate = useNavigate();
+    const fetchCtx = useContext(FetchContext);
 
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +25,8 @@ const AuthForm = () => {
             return res.data;
         })
         .then((data) => {
-            console.log(data);
             authCtx.login(data[0].id)
-            //navigate('/', {replace:true}) //TODO redirection
+            fetchCtx.getWatchlist(data[0].id)
         })
         .catch((err) => {
             setIsLoading(false)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 
 const BACK_END_URL=process.env.REACT_APP_BACKEND_URL;
@@ -21,10 +21,6 @@ export const FetchContextProvider = (props) => {
         setWatchList(data);
         };
 
-    // useEffect(() => {
-    //     fetchWatchList();
-    // }, []);
-
     const addToWatchList = async (viewer_id, request_body) => {
         const { data } = await axios.post(
             `${BACK_END_URL}watchlist/${viewer_id}/add`,
@@ -40,10 +36,6 @@ export const FetchContextProvider = (props) => {
             console.log('Deleted!', data);
             getAllWatchList(viewer_id);
         };
-
-    useEffect((id) => {
-        getAllWatchList(id);
-    }, []);
 
     const contextValue = {
         watchlist:watchlist,

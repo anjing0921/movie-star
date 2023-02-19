@@ -1,22 +1,16 @@
 import "./App.css";
 import BottomNav from "./components/BottomNav";
-import { BrowserRouter, Route, Routes, createBrowserRouter} from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./components/Header/Header";
 import { Container } from "@mui/material";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
 import Search from "./Pages/Search/Search";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import axios from "axios";
 import WatchlistPage from "./Pages/Watchlist/WatchlistPage";
 import Login from "./Pages/Login/Login"
 import AuthPage from "./Pages/Auth/AuthPage";
-
-const router = createBrowserRouter([{
-  path:'/',
-  element: <Trending />
-}]
-)
 
 function App() {
 
@@ -66,9 +60,7 @@ function App() {
               />
               <Route path="/movies" element={<Movies moviesContent={moviesContent}/>}/>
               <Route path="/login" element={<Login />} />
-              {/* {!authCtx.isLoggedIn && (<Route path="/auth" element={<AuthPage />}/>)} */}
-              <Route path="/auth" element={<AuthPage />}/>
-              {/* {authCtx.isLoggedIn && (<Route path="/list" element={<WatchlistPage/>}/>)} */}
+              <Route path="/auth" element={<AuthPage />}/>              
               <Route path="/list" element={<WatchlistPage/>}/>
               <Route path="/search" element={<Search/>}/>
             </Routes>                       
