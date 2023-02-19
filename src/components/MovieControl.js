@@ -12,8 +12,7 @@ const MovieControl = ({movie}) => {
   
 
   const deleteHandler = () => {
-    fetchCtx.onDelete(watchlist_id);
-    fetchCtx.getWatchlist(authCtx.token)
+    fetchCtx.onDelete(authCtx.token, watchlist_id);
     }
 
   return (

@@ -13,7 +13,7 @@ const FetchContext = React.createContext({
 export const FetchContextProvider = (props) => {
     const [watchlist, setWatchList] = useState([]);
 
-    const fetchWatchList = async (viewer_id) => {
+    const getAllWatchList = async (viewer_id) => {
         const { data } = await axios.get(
             `${BACK_END_URL}viewers/${viewer_id}/watchlist`
             );
@@ -33,20 +33,21 @@ export const FetchContextProvider = (props) => {
             console.log('Added!', data);
         };
 
-    const deleteFromWatchList = async (watchlist_id) => {
+    const deleteFromWatchList = async (viewer_id, watchlist_id) => {
         const { data } = await axios.delete(
             `${BACK_END_URL}watchlist/${watchlist_id}`
             );
             console.log('Deleted!', data);
+            getAllWatchList(viewer_id);
         };
 
     useEffect((id) => {
-        fetchWatchList(id);
+        getAllWatchList(id);
     }, []);
 
     const contextValue = {
         watchlist:watchlist,
-        getWatchlist: fetchWatchList,
+        getWatchlist: getAllWatchList,
         onAdd: addToWatchList,
         onDelete: deleteFromWatchList
     }
