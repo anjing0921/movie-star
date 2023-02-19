@@ -1,23 +1,26 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AuthContext from "../store/auth-context";
+import FetchContext from "../store/fetch-context";
 
+const MovieControl = ({movie}) => {
 
-const MovieControl = () => {
+  const authCtx = useContext(AuthContext);
+  const fetchCtx = useContext(FetchContext);
+  const watchlist_id = movie.watchlists[0].id
+  
 
-  // const {
-  //   removeMovieFromWatchlist
-  // } = useContext(GlobalContext);
-
-
+  const deleteHandler = () => {
+    fetchCtx.onDelete(authCtx.token, watchlist_id);
+    }
 
   return (
     <>
     <Button variant="outlined" startIcon={<DeleteIcon />}
-            //onClick={() => removeMovieFromWatchlist(movie.id)}
-    >
-        Delete
-      </Button>
+            onClick={deleteHandler}
+    > Delete
+    </Button>
 
     </>
   )

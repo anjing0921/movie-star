@@ -14,8 +14,6 @@ const Search = () => {
   const [content, setContent] = useState([]);
   //const [numOfPages, setNumOfPages] = useState();
 
-
-
   const fetchSearch = async () => {
     try {
       const { data } = await axios.get(

@@ -94,8 +94,7 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
                     {content.overview}
                   </span>
                   <YoutubeButton video={video}/>
-                  <AddonButton content={content} setWatchList={setWatchList} watchlist={watchlist}/>
-                  
+                  <AddonButton content={content} />
                 </div>
               </div>
             </Box>

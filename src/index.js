@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AuthContextProvider } from './store/auth-context';
+import { FetchContextProvider } from "./store/fetch-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,8 +17,12 @@ root.render(
         redirect_uri: "https://www.dealmoon.com"
       }}
     >
-      <App />
-    </Auth0Provider>
+      <AuthContextProvider>
+        <FetchContextProvider>
+        <App />
+        </FetchContextProvider>
+        </AuthContextProvider>
+      </Auth0Provider>
   </React.StrictMode>
 );
 

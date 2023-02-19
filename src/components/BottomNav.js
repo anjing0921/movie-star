@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../store/auth-context';
+import FetchContext from '../store/fetch-context';
 import Box from '@mui/material/Box'
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -9,8 +10,11 @@ import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import SearchIcon from '@mui/icons-material/Search';
 import ListIcon from '@mui/icons-material/List';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const BottomNav = () => {
+    const authCtx = useContext(AuthContext);
+    const fetchCtx = useContext(FetchContext);
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -25,9 +29,20 @@ const BottomNav = () => {
         navigate("/search");
       } else if (value === 4) {
         navigate("/list");
-      }
+      } else if (value === 5) {
+        navigate("/auth");
+      } 
+
     },[value, navigate]);
+
+    const logoutHandler = () => {
+      authCtx.logout();
+    }
     
+    const WatchlistHandler = () => {
+      fetchCtx.getWatchlist(authCtx.token)
+    }
+
     return (
         <Box sx={{width: "100%", position:"fixed", bottom:0, zIndex:100}}>
             <BottomNavigation
@@ -39,7 +54,10 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Movies" icon={<MovieFilterIcon />} />
                 <BottomNavigationAction label="Login" icon={<LoginIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                <BottomNavigationAction label="WatchList" icon={<ListIcon />} />
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler}/>)}
+                {!authCtx.isLoggedIn && (<BottomNavigationAction label="Auth" icon={<LoginIcon />} />)}
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} />)}
+
             </BottomNavigation>    
         </Box>
     )
