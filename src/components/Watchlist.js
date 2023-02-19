@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import MovieCard from './MovieCard'
-import FetchContext from '../store/fetch-context'
+import AuthContext from '../store/fetch-context'
 
 const Watchlist = () => {
-  const fetchCtx = useContext(FetchContext);
+  const authCtx = useContext(AuthContext);
 
   return (
     <div className="movie-page">
@@ -11,9 +11,8 @@ const Watchlist = () => {
         <div >
           <span className="pageTitle">Watch list</span>
         </div>
-
         <div className="movie-grid">
-            {fetchCtx.watchlist.map((movie) => (
+            {authCtx.watchlist.map((movie) => (
               <MovieCard movie={movie} key={movie.id}  />
             ))}
         </div>

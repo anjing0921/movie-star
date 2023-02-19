@@ -14,7 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const BottomNav = () => {
     const authCtx = useContext(AuthContext);
-    const FetchCtx = useContext(FetchContext);
+    const fetchCtx = useContext(FetchContext);
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -41,8 +41,8 @@ const BottomNav = () => {
       navigate('/trending', {replace:true})
     }
     
-    const getWatchlist = () => {
-      FetchCtx.onFetch();
+    const WatchlistHandler = () => {
+      fetchCtx.getWatchlist(authCtx.token)
     }
 
     return (
@@ -56,7 +56,7 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Movies" icon={<MovieFilterIcon />} />
                 <BottomNavigationAction label="Login" icon={<LoginIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={getWatchlist} />)}
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler}/>)}
                 {!authCtx.isLoggedIn && (<BottomNavigationAction label="Auth" icon={<LoginIcon />} />)}
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} />)}
 
