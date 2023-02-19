@@ -39,7 +39,7 @@ const SingleContent = ({id,
       />
       <img
         className="poster"
-        src={`https://image.tmdb.org/t/p/w200${poster}`}
+        src={poster? `https://image.tmdb.org/t/p/w200${poster}` : "https://www.movienewz.com/img/films/poster-holder.jpg"}
         alt={`${title} Poster`}
       />
       <b className="title">{title}</b>
