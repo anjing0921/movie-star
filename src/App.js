@@ -1,37 +1,29 @@
 import "./App.css";
 import BottomNav from "./components/BottomNav";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, createBrowserRouter} from "react-router-dom";
 import Header from "./components/Header/Header";
 import { Container } from "@mui/material";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
 import Search from "./Pages/Search/Search";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Watchlist from "./components/Watchkist";
+import WatchlistPage from "./Pages/Watchlist/WatchlistPage";
 import Login from "./Pages/Login/Login"
 import AuthPage from "./Pages/Auth/AuthPage";
-import AuthContext from './store/auth-context';
+
+const router = createBrowserRouter([{
+  path:'/',
+  element: <Trending />
+}]
+)
 
 function App() {
 
-  const authCtx = useContext(AuthContext);
+  // const [searchContent, setSearchContent] = useState([]);
   const [trendingContent, setTrendingContent] = useState([]);
   const [moviesContent, setMoviesContent] = useState([]);
   const [page, setPage] = useState(1);
-  const [watchlist, setWatchList] = useState([]);
-  const [searchContent, setSearchContent] = useState([]);
-
-  const fetchWatchList = async () => {
-    const { data } = await axios.get(
-      "https://movie-star-back-end.herokuapp.com/viewers/2/watchlist"
-    );
-    //console.log(data);
-    setWatchList(data);
-  };
-  useEffect(() => {
-    fetchWatchList();
-  }, []);
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
@@ -58,7 +50,7 @@ function App() {
         <span>
           <Header />
         </span>
-        <div className="app">
+        <section className="app">
           <Container>
             <Routes>
               <Route
@@ -68,43 +60,20 @@ function App() {
                     page={page}
                     trendingContent={trendingContent}
                     setPage={setPage}
-                    watchlist={watchlist}
-                    setWatchList={setWatchList}
                     fetchTrending={fetchTrending}
                   />
                 }
               />
-              <Route
-                path="/movies"
-                element={<Movies moviesContent={moviesContent} watchlist={watchlist}
-              setWatchList={setWatchList}/>}
-            />
+              <Route path="/movies" element={<Movies moviesContent={moviesContent}/>}/>
               <Route path="/login" element={<Login />} />
+              {/* {!authCtx.isLoggedIn && (<Route path="/auth" element={<AuthPage />}/>)} */}
               <Route path="/auth" element={<AuthPage />}/>
-              {authCtx.isLoggedIn && (
-              <Route
-                path="/list"
-                element={
-                  <Watchlist
-                    watchlist={watchlist}
-                    setWatchList={setWatchList}
-                  />
-                }
-              />
-              )}
-              <Route
-                path="/search"
-                element={
-                  <Search
-                    searchContent={searchContent}
-                    setWatchList={setWatchList}
-                    watchlist={watchlist}
-                  />
-                }
-              />
-            </Routes>
+              {/* {authCtx.isLoggedIn && (<Route path="/list" element={<WatchlistPage/>}/>)} */}
+              <Route path="/list" element={<WatchlistPage/>}/>
+              <Route path="/search" element={<Search/>}/>
+            </Routes>                       
           </Container>
-        </div>
+        </section>
         <BottomNav />
       </BrowserRouter>
     </>

@@ -14,9 +14,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
-const API_KEY=process.env.REACT_APP_FIREBASE_API_KEY;
-
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -87,15 +84,6 @@ export default function SignIn() {
       })
 
   }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={theme}>

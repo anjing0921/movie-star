@@ -1,4 +1,5 @@
 import { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
 import classes from './AuthForm.module.css';
 import axios from 'axios'
@@ -12,12 +13,13 @@ const AuthForm = () => {
     const nameInputRef = useRef();
 
     const authCtx = useContext(AuthContext);
+    //const navigate = useNavigate();
 
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
     const login = (parameter) => {
-        return axios.get(BACK_END_URL, {params:parameter})
+        return axios.get(`${BACK_END_URL}/viewers`, {params:parameter})
         .then((res) => {
             setIsLoading(false)
             return res.data;
@@ -25,6 +27,7 @@ const AuthForm = () => {
         .then((data) => {
             console.log(data);
             authCtx.login(data[0].id)
+            //navigate('/', {replace:true}) //TODO redirection
         })
         .catch((err) => {
             setIsLoading(false)
@@ -34,7 +37,7 @@ const AuthForm = () => {
 
     const signUp = (parameter) => {
 
-        return axios.post(BACK_END_URL, parameter)
+        return axios.post(`${BACK_END_URL}/viewers`, parameter)
         .then((res) => {
             setIsLoading(false)
             return res.data;

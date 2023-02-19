@@ -9,12 +9,12 @@ const SingleContent = ({id,
   title,
   date,
   media_type,
-  vote_average,
-  setWatchList,watchlist}) => {
+  vote_average
+}) => {
+  
   return (
     <>
-    
-    <ContentModal media_type={media_type} id={id} setWatchList={setWatchList} watchlist={watchlist}>
+    <ContentModal media_type={media_type} id={id} >
       <Badge  badgeContent={vote_average.toFixed(1)}
             color={vote_average > 6 ? "primary" : "secondary"}
       />
@@ -24,7 +24,7 @@ const SingleContent = ({id,
         alt={`${title} Poster`}
       />
       <b className="title">{title}</b>
-      <Rating name="star-rate" value={vote_average / 2 } precision={0.01} readOnly />
+      <Rating name="star-rate" value={vote_average / 2 } precision={0.1} readOnly />
       <span className="subTitle">
       {media_type === "tv" ? "TV Series" : "Movie"}
         <span className="subTitle">{date}</span>

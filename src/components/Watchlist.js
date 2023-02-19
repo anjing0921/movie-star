@@ -1,11 +1,10 @@
-import React, {useContext} from 'react'
-
+import React, { useContext } from 'react'
 import MovieCard from './MovieCard'
+import FetchContext from '../store/fetch-context'
 
-const Watchlist = ({setWatchList, watchlist}) => {
+const Watchlist = () => {
+  const fetchCtx = useContext(FetchContext);
 
-  
-  
   return (
     <div className="movie-page">
       <div className="container">
@@ -14,7 +13,7 @@ const Watchlist = ({setWatchList, watchlist}) => {
         </div>
 
         <div className="movie-grid">
-            {watchlist.map((movie) => (
+            {fetchCtx.watchlist.map((movie) => (
               <MovieCard movie={movie} key={movie.id}  />
             ))}
         </div>
@@ -23,7 +22,5 @@ const Watchlist = ({setWatchList, watchlist}) => {
     </div>
   );
 };
-   
- 
 
 export default Watchlist
