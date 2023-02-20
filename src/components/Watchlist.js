@@ -4,8 +4,6 @@ import FetchContext from '../store/fetch-context';
 
 const Watchlist = () => {
   const fetchCtx = useContext(FetchContext)
-  console.log(fetchCtx.watchlist);
-
   return (
     <div className="movie-page">
       <div className="container">
@@ -17,6 +15,7 @@ const Watchlist = () => {
               <MovieCard movie={movie} key={movie.id}  />
             ))}
         </div>
+        
         
       </div>
     </div>

@@ -5,15 +5,14 @@ import AuthContext from "../store/auth-context";
 import FetchContext from "../store/fetch-context";
 
 const MovieControl = ({movie}) => {
-
   const authCtx = useContext(AuthContext);
   const fetchCtx = useContext(FetchContext);
 
-  const id = movie.watchlists[0].watchlist_id;
+  const watchlist_id = movie.watchlists[0].id;
   const viewer_id = authCtx.token;
 
   const deleteHandler = () => {
-    fetchCtx.onRemove(viewer_id, id);
+    fetchCtx.onRemove(viewer_id, watchlist_id);
     }
 
   return (
