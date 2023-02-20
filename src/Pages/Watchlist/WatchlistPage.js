@@ -1,8 +1,9 @@
-import Watchlist from '../../components/Watchlist';
+// import Watchlist from '../../components/Watchlist';
+import ContentList from "./ContentList";
 
 
 const WatchlistPage = () => {
-    return <Watchlist />;
+    return <ContentList />
 };
 
 export default WatchlistPage;
