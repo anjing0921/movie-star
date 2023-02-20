@@ -7,7 +7,7 @@ const FetchContext = React.createContext({
     watchlist: [],
     getWatchlist: ()=>{},
     onAdd: ()=> {},
-    onDelete: ()=> {}
+    onRemove: ()=> {}
     });
 
 export const FetchContextProvider = (props) => {
@@ -17,7 +17,7 @@ export const FetchContextProvider = (props) => {
         const { data } = await axios.get(
             `${BACK_END_URL}viewers/${viewer_id}/watchlist`
             );
-        console.log(data);
+        console.log('getAllWL',data);
         setWatchList(data);
         };
 
@@ -29,19 +29,19 @@ export const FetchContextProvider = (props) => {
             console.log('Added!', data);
         };
 
-    const deleteFromWatchList = async (viewer_id, watchlist_id) => {
+    const deleteFromWatchList = async (viewer_id, id) => {
         const { data } = await axios.delete(
-            `${BACK_END_URL}watchlist/${watchlist_id}`
-            );
-            console.log('Deleted!', data);
-            getAllWatchList(viewer_id);
+            `${BACK_END_URL}watchlist/${id}`
+            )
+            console.log('deleted!', data)
+            // getAllWatchList(viewer_id)            
         };
 
     const contextValue = {
         watchlist:watchlist,
         getWatchlist: getAllWatchList,
         onAdd: addToWatchList,
-        onDelete: deleteFromWatchList
+        onRemove: deleteFromWatchList
     }
 
         return (

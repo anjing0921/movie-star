@@ -8,11 +8,12 @@ const MovieControl = ({movie}) => {
 
   const authCtx = useContext(AuthContext);
   const fetchCtx = useContext(FetchContext);
-  const watchlist_id = movie.watchlists[0].id
-  
+
+  const id = movie.watchlists[0].watchlist_id;
+  const viewer_id = authCtx.token;
 
   const deleteHandler = () => {
-    fetchCtx.onDelete(authCtx.token, watchlist_id);
+    fetchCtx.onRemove(viewer_id, id);
     }
 
   return (
