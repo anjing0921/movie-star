@@ -7,7 +7,9 @@ const FetchContext = React.createContext({
     watchlist: [],
     getWatchlist: ()=>{},
     onAdd: ()=> {},
-    onRemove: ()=> {}
+    onRemove: ()=> {},
+    onUpdate: ()=> {},
+    byGenre: ()=> {}
     });
 
 export const FetchContextProvider = (props) => {
@@ -26,6 +28,7 @@ export const FetchContextProvider = (props) => {
             request_body
             );
             console.log('Added!', data);
+            getAllWatchList(viewer_id)
         };
 
     const deleteFromWatchList = async (viewer_id, watchlist_id) => {
@@ -41,7 +44,8 @@ export const FetchContextProvider = (props) => {
         const { data } = await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
-            console.log('updated!', data)                     
+            console.log('updated!', data)
+            getAllWatchList(viewer_id)                 
         }
     
     const filterWatchlistByGenre = async (viewer_id, parameter) => {
@@ -53,6 +57,48 @@ export const FetchContextProvider = (props) => {
         getAllWatchList(viewer_id);
     }
 
+    const HandleSortContents = (value) => {
+        if (value === 'rate'){
+            setWatchList((watchlist) => 
+            [...watchlist].sort((a, b) => b.watchlists[0].viewer_rate - a.watchlists[0].viewer_rate)
+            )
+        } else if (value === 'date') {
+            setWatchList((watchlist) => 
+            [...watchlist].sort((a, b) => new Date(b.date) - new Date(a.date))
+            )
+        } else if (value === 'title') {
+            setWatchList((watchlist) => 
+            [...watchlist].sort((a, b) => a.title.localeCompare(b.title))
+            )
+        }
+        
+    } 
+
+    const HandleFilterContents = (id, value) => {
+        const parameter = {"filter":value};
+        const viewer_id = id;
+        if (value === 0){
+            axios.get(       
+                `${BACK_END_URL}viewers/${viewer_id}/watchlist`
+            ).then((data) => {
+                console.log('origin!', data.data)
+                setWatchList([...data.data])
+            }).catch((err) => {
+                alert(err.response.data.details)
+            });
+        } else{
+            axios.get(       
+                `${BACK_END_URL}viewers/${viewer_id}/watchlist`,
+                { params: parameter }
+            ).then((data) => {
+                console.log('filtered!', data.data)
+                setWatchList([...data.data])
+            }).catch((err) => {
+                alert(err.response.data.details)
+            });
+        }          
+        }
+
 
     const contextValue = {
         watchlist:watchlist,
@@ -60,7 +106,9 @@ export const FetchContextProvider = (props) => {
         onAdd: addToWatchList,
         onRemove: deleteFromWatchList,
         onUpdate: updateWatchlist,
-        byGenre: filterWatchlistByGenre
+        byGenre: filterWatchlistByGenre,
+        onSort: HandleSortContents,
+        onFilter: HandleFilterContents
     }
 
     return (
