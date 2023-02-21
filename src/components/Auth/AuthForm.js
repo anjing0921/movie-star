@@ -26,7 +26,8 @@ const AuthForm = () => {
         })
         .then((data) => {
             authCtx.login(data[0].id)
-            fetchCtx.getWatchlist(data[0].id)
+            const watch = fetchCtx.getWatchlist(data[0].id)
+            console.log(watch)
         })
         .catch((err) => {
             setIsLoading(false)
