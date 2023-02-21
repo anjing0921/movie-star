@@ -31,7 +31,9 @@ const BottomNav = () => {
         navigate("/list");
       } else if (value === 5) {
         navigate("/auth");
-      } 
+      } else if (value === 6) {
+        navigate("/logout");
+      }
 
     },[value, navigate]);
 
@@ -57,7 +59,6 @@ const BottomNav = () => {
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler}/>)}
                 {!authCtx.isLoggedIn && (<BottomNavigationAction label="Auth" icon={<LoginIcon />} />)}
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} />)}
-
             </BottomNavigation>    
         </Box>
     )

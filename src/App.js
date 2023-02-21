@@ -27,7 +27,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/search" element={<Search/>}/>
               <Route path="/list" element={<WatchlistPage/>}/>
-              <Route path="/auth" element={<AuthPage />}/>           
+              <Route path="/auth" element={<AuthPage />}/>      
             </Routes>                       
           </Container>
         </section>

@@ -60,7 +60,9 @@ const Search = () => {
           title={c.title || c.name}
           date={c.first_air_date || c.release_date}
           media_type="movie"
-          vote_average={c.vote_average}/>
+          vote_average={c.vote_average}
+          genre_ids={c.genre_ids}
+          />
         ))}
       </div>
     </>

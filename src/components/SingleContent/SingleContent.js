@@ -9,22 +9,29 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import AuthContext from '../../store/auth-context';
 import FetchContext from '../../store/fetch-context'
 
-const SingleContent = ({id,
+const DEFAULT_RATE = 5;
+const SingleContent = ({
+  id,
   poster,
   title,
   date,
   media_type,
-  vote_average
+  vote_average,
+  genre_ids
+
 }) => {
   const authCtx = useContext(AuthContext)
   const fetchCtx = useContext(FetchContext)
 
+  
   const checkHandler = (event) => {    
     const request_body ={
       viewer_id: authCtx.token,
       content: {
-        id, poster, title, date, media_type, vote_average
-      }
+        id, poster, title, date, media_type, vote_average, genre_ids
+      },
+      viewer_rate: DEFAULT_RATE,
+      viewer_comment: "" 
     }
     fetchCtx.onAdd(authCtx.token, request_body)
   };

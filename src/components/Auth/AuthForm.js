@@ -43,6 +43,7 @@ const AuthForm = () => {
         })
         .then((data) => {
             console.log(data);
+            login({ email:parameter.email})  
         })
         .catch((err) => {
             setIsLoading(false)
@@ -65,7 +66,7 @@ const AuthForm = () => {
                 name: enteredName,
                 email: enteredEmail,
                 password: enteredPassword
-        })        
+            })   
     }
 }
     const switchAuthModeHandler = () => {
