@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 const BACK_END_URL=process.env.REACT_APP_BACKEND_URL;
 
 const FetchContext = React.createContext({
     watchlist: [],
+    genres:[],
     getWatchlist: ()=>{},
     onAdd: ()=> {},
     onRemove: ()=> {},
     onUpdate: ()=> {},
-    byGenre: ()=> {}
+    byGenre: ()=> {},
+    getGenres: () => {}
     });
 
 export const FetchContextProvider = (props) => {
     const [watchlist, setWatchList] = useState([]);
+    const [genres, setGenres] = useState([]);
 
     const getAllWatchList = async (viewer_id) => {
         const { data } = await axios.get(
@@ -21,6 +24,18 @@ export const FetchContextProvider = (props) => {
             );
         setWatchList(data);
         };
+    
+    const getAllGenres = async (viewer_id) => {
+        const { data } = await axios.get(
+            `${BACK_END_URL}genres`
+            );
+            setGenres(data);
+        };
+
+    useEffect(() => {
+        getAllGenres();
+    }, [])
+    
 
     const addToWatchList = async (viewer_id, request_body) => {
         const { data } = await axios.post(
@@ -101,14 +116,16 @@ export const FetchContextProvider = (props) => {
 
 
     const contextValue = {
-        watchlist:watchlist,
+        watchlist: watchlist,
+        genres: genres,
         getWatchlist: getAllWatchList,
         onAdd: addToWatchList,
         onRemove: deleteFromWatchList,
         onUpdate: updateWatchlist,
         byGenre: filterWatchlistByGenre,
         onSort: HandleSortContents,
-        onFilter: HandleFilterContents
+        onFilter: HandleFilterContents,
+        getGenres: getAllGenres
     }
 
     return (

@@ -20,12 +20,12 @@ const ContentList =() =>{
     const HandleFilterContents = (value) => {
         fetchCtx.onFilter(authCtx.token, value)
     }
-    
+
     return (
         <>
         <Box sx={{display: 'flex', flexDirection: 'row',justifyContent:'space-between'}}>
-        <SortButton onSort={HandleSortContents}/>
-        <FilterButton onFilter={HandleFilterContents}/>
+            <SortButton onSort={HandleSortContents}/>
+            <FilterButton genres={fetchCtx.genres} onFilter={HandleFilterContents}/>
         </Box>
         <List>
             {fetchCtx.watchlist && 
