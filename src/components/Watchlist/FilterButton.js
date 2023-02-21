@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function FilterButton({onFilter}) {
+export default function FilterButton({genres, onFilter}) {
   const [filter, setFilter] = useState('');
 
   const handleChange = (event) => {
@@ -25,9 +25,15 @@ export default function FilterButton({onFilter}) {
           onChange={handleChange}
         >
           <MenuItem value={0}>All</MenuItem>
-          <MenuItem value={12}>Adventure</MenuItem>
-          <MenuItem value={14}>Fantasy</MenuItem>
-          <MenuItem value={35}>Comedy</MenuItem>
+          {genres.map((genre) => {
+            return <MenuItem 
+                    key={genre.id} 
+                    value={genre.id}
+                  >
+                  {genre.name}
+                  </MenuItem>
+          })
+          }
         </Select>
       </FormControl>
     </Box>
