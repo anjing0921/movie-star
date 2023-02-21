@@ -43,6 +43,15 @@ export const FetchContextProvider = (props) => {
             )
             console.log('updated!', data)                     
         }
+    
+    const filterWatchlistByGenre = async (viewer_id, parameter) => {
+        const { data } = await axios.get(
+            `${BACK_END_URL}viewers/${viewer_id}/watchlist` ,{ params: parameter }
+            );
+        console.log('filtered!', data)
+        setWatchList(data);
+        getAllWatchList(viewer_id);
+    }
 
 
     const contextValue = {
@@ -50,7 +59,8 @@ export const FetchContextProvider = (props) => {
         getWatchlist: getAllWatchList,
         onAdd: addToWatchList,
         onRemove: deleteFromWatchList,
-        onUpdate: updateWatchlist
+        onUpdate: updateWatchlist,
+        byGenre: filterWatchlistByGenre
     }
 
     return (

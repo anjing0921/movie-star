@@ -54,9 +54,9 @@ const ContentCard = ({content}) => {
                 </IconButton>
             }
         >
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}> 
+        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}> 
             <CardMedia 
-                component="img" sx={{height:120, width:90}} 
+                component="img" sx={{height:120, width:90, flexWrap: 'wrap'}} 
                 image={`https://image.tmdb.org/t/p/w200${content.poster}`} 
                 alt={`${content.title} Poster`}
             />
