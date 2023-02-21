@@ -36,20 +36,28 @@ export const FetchContextProvider = (props) => {
             getAllWatchList(viewer_id)            
         };
 
+    const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
+        const { data } = await axios.put(
+            `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
+            )
+            console.log('updated!', data)
+            getAllWatchList(viewer_id)             
+        }
+
+
     const contextValue = {
         watchlist:watchlist,
         getWatchlist: getAllWatchList,
         onAdd: addToWatchList,
-        onRemove: deleteFromWatchList
+        onRemove: deleteFromWatchList,
+        onUpdate: updateWatchlist
     }
 
-        return (
-            <FetchContext.Provider value={contextValue}>
+    return (
+        <FetchContext.Provider value={contextValue}>
             {props.children}
-            </FetchContext.Provider>
-        );
-    
-
+        </FetchContext.Provider>
+    );
 }
 
 export default FetchContext;
