@@ -42,7 +42,6 @@ const AuthForm = () => {
             return res.data;
         })
         .then((data) => {
-            console.log(data);
             login({ email:parameter.email})  
         })
         .catch((err) => {

@@ -43,17 +43,16 @@ const ContentCard = ({content}) => {
         }
         fetchCtx.onUpdate(viewer_id, watchlist_id, request_body);
         setOnEdit(false)
-        setComment()
+        setComment(enteredComment)
     }
 
     return (
-    <ListItem
-        key={content.id}
-        secondaryAction = {
-            <IconButton area-label='delete'>
-                <DeleteIcon onClick={deleteHandler}/>
-            </IconButton>
-        }
+        <ListItem
+            secondaryAction = {
+                <IconButton onClick={deleteHandler} area-label='delete'>
+                    <DeleteIcon />
+                </IconButton>
+            }
         >
         <Box sx={{ display: 'flex', flexDirection: 'row' }}> 
             <CardMedia 

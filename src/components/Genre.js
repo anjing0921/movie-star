@@ -26,7 +26,6 @@ const Genres = ({
         const { data } = await axios.get(
         `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
         );
-        console.log('genres movie data',data.genres)
         setGenres(data.genres);
     };
 
@@ -34,7 +33,6 @@ const Genres = ({
         const { data } = await axios.get(
         `https://api.themoviedb.org/3/genre/tv/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
         );
-        console.log('genres tv data',data.genres)
         setGenres(data.genres);
     };
 
@@ -42,7 +40,6 @@ const Genres = ({
         const { data } = await axios.get(
         `https://api.themoviedb.org/3/genre/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
         );
-        console.log('genres all data',data.genres)
         setGenres(data.genres);
     };
     useEffect(() => {

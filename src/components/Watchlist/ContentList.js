@@ -12,7 +12,7 @@ const ContentList =() =>{
         <List>
             {contents.map((content) => {
                 return (
-                    <Card sx={{ display: 'flex', margin:'1em' }}>
+                    <Card key={content.watchlists[0].id} sx={{ display: 'flex', margin:'1em' }}>
                         <ContentCard 
                             content={content}
                         />  

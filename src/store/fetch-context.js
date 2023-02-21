@@ -37,11 +37,11 @@ export const FetchContextProvider = (props) => {
         };
 
     const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
+        console.log(viewer_id, watchlist_id, request_body);
         const { data } = await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
-            console.log('updated!', data)
-            getAllWatchList(viewer_id)             
+            console.log('updated!', data)                     
         }
 
 
