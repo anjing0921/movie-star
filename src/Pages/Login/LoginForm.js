@@ -33,6 +33,7 @@ const theme = createTheme();
 
 export default function LoginForm() {
   const authCtx = useContext(AuthContext);
+  const fetchCtx = useContext(FetchContext);
 
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -49,6 +50,7 @@ export default function LoginForm() {
     })
     .then((data) => {
         authCtx.login(data[0].id)
+        fetchCtx.getWatchlist(data[0].id)
     })
     .catch((err) => {
         setIsLoading(false)
@@ -87,7 +89,7 @@ export default function LoginForm() {
           name: enteredName,
           email: enteredEmail,
           password: enteredPassword
-      })   
+      })
   }  
   }    
 

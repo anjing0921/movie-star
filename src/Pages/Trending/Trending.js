@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useState} from "react";
 import axios from "axios";
+import { useEffect, useState} from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import './Trending.css';
 import CustomPagination from "../../components/Pagination/CustomPagination";
