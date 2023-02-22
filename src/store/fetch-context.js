@@ -40,27 +40,24 @@ export const FetchContextProvider = (props) => {
     
 
     const addToWatchList = async (viewer_id, request_body) => {
-        const { data } = await axios.post(
+        await axios.post(
             `${BACK_END_URL}watchlist/${viewer_id}/add`,
             request_body
-            );
-            console.log('Added!', data);
+            ).catch((err) => (alert(err.response.data)))
             getAllWatchList(viewer_id)
         };
 
     const deleteFromWatchList = async (viewer_id, watchlist_id) => {
-        const { data } = await axios.delete(
+        await axios.delete(
             `${BACK_END_URL}watchlist/${watchlist_id}`
             )
-            console.log('deleted!', data)
             getAllWatchList(viewer_id)            
         };
 
     const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
-        const { data } = await axios.put(
+        await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
-            console.log('updated!', data)
             getAllWatchList(viewer_id)                 
         }
     
