@@ -1,25 +1,27 @@
 import * as React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-// import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AuthContext from '../../store/auth-context';
+import FetchContext from '../../store/fetch-context';
+import axios from 'axios'
+
+const BACK_END_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://mui.com/"> 
+        Movie Star
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -29,61 +31,76 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function LoginForm() {
+  const authCtx = useContext(AuthContext);
+  const fetchCtx = useContext(FetchContext);
+
+  const nameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef(); 
+
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const login = (parameter) => {
+    console.log(parameter)
+    return axios.get(`${BACK_END_URL}/viewers`, {params:parameter})
+    .then((res) => {
+        setIsLoading(false)
+        return res.data;
+    })
+    .then((data) => {
+        authCtx.login(data[0].id)
+        const watch = fetchCtx.getWatchlist(data[0].id)
+        console.log(watch)
+    })
+    .catch((err) => {
+        setIsLoading(false)
+        alert(err.response.data.details)
+    }); 
+  }
+
+  const signUp = (parameter) => {
+
+      return axios.post(`${BACK_END_URL}/viewers`, parameter)
+      .then((res) => {
+          setIsLoading(false)
+          return res.data;
+      })
+      .then((data) => {
+          login({ email:parameter.email})  
+      })
+      .catch((err) => {
+          setIsLoading(false)
+          alert(err.response.data.details);
+      }); 
+  }
+
+  
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
+
+    if (isLogin){
+      login({ email:enteredEmail})
+    } else {
+      const enteredName = nameInputRef.current.value;
+      signUp({
+          name: enteredName,
+          email: enteredEmail,
+          password: enteredPassword
+      })   
+  }  
+  }    
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
-
-    setIsLoading(true);
-    let url;
-    if (isLogin) {
-        url =
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDD5vgBiy7d8-4xYNXT8_2KqMFHRAkcxjg`;
-    } else {
-        url =
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDD5vgBiy7d8-4xYNXT8_2KqMFHRAkcxjg`;
-    }
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = 'Authentication failed!';
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        alert(err.message);
-      })
-
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -104,6 +121,17 @@ export default function SignIn() {
             {isLogin ? 'Login' : 'Sign Up'}
           </Typography>
           <Box component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1 }}>
+            {!isLogin ?
+            (<TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Your Name"
+              name="name"
+              inputRef={nameInputRef}
+            />):<></>
+            }
             <TextField
               margin="normal"
               required
@@ -111,9 +139,7 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
-              autoFocus
-              ref={emailInputRef}
+              inputRef={emailInputRef}
             />
             <TextField
               margin="normal"
@@ -123,12 +149,7 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
-              ref={passwordInputRef}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              inputRef={passwordInputRef}
             />
             <Button
               type="submit"
@@ -142,23 +163,9 @@ export default function SignIn() {
             <Button
             type='button'
             onClick={switchAuthModeHandler}
-          >
+            >
             {isLogin ? 'Create new account' : 'Login with existing account'}
           </Button>
-
-
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

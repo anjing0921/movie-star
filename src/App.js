@@ -4,11 +4,11 @@ import { Container } from "@mui/material";
 import Header from "./components/Header/Header";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
-import Login from "./Pages/Login/Login"
+import LoginForm from "./Pages/Login/LoginForm"
 import LogoutPage from "./Pages/Logout/LogoutPage";
 import Search from "./Pages/Search/Search";
 import WatchlistPage from "./Pages/Watchlist/WatchlistPage";
-import AuthPage from "./Pages/Auth/AuthPage";
+// import AuthPage from "./Pages/Auth/AuthPage";
 import BottomNav from "./components/BottomNav";
 
 function App() {
@@ -25,10 +25,11 @@ function App() {
             <Routes>
               <Route path="/" element={ <Trending/>}/>
               <Route path="/movies" element={<Movies />}/>
-              <Route path="/login" element={<Login />} />
+              {/* <Route path="/movies" element={<Series />}/> */}
               <Route path="/search" element={<Search/>}/>
               <Route path="/list" element={<WatchlistPage/>}/>
-              <Route path="/auth" element={<AuthPage />}/> 
+              <Route path="/login" element={<LoginForm />} />
+              {/* <Route path="/auth" element={<AuthPage />}/>  */}
               <Route path="/logout" element={<LogoutPage />}/>          
             </Routes>                       
           </Container>
