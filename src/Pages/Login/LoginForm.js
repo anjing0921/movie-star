@@ -33,7 +33,6 @@ const theme = createTheme();
 
 export default function LoginForm() {
   const authCtx = useContext(AuthContext);
-  const fetchCtx = useContext(FetchContext);
 
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -43,7 +42,6 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const login = (parameter) => {
-    console.log(parameter)
     return axios.get(`${BACK_END_URL}/viewers`, {params:parameter})
     .then((res) => {
         setIsLoading(false)
@@ -51,8 +49,6 @@ export default function LoginForm() {
     })
     .then((data) => {
         authCtx.login(data[0].id)
-        const watch = fetchCtx.getWatchlist(data[0].id)
-        console.log(watch)
     })
     .catch((err) => {
         setIsLoading(false)
@@ -76,9 +72,7 @@ export default function LoginForm() {
       }); 
   }
 
-  
-
-  const submitHandler = (event) => {
+    const submitHandler = (event) => {
     event.preventDefault();
     setIsLoading(true);
 

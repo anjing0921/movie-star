@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import Header from "./components/Header/Header";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
+import TVSeries from "./Pages/TVSeries/TVSeries"
 import LoginForm from "./Pages/Login/LoginForm"
 import LogoutPage from "./Pages/Logout/LogoutPage";
 import Search from "./Pages/Search/Search";
@@ -25,7 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={ <Trending/>}/>
               <Route path="/movies" element={<Movies />}/>
-              {/* <Route path="/movies" element={<Series />}/> */}
+              <Route path="/series" element={<TVSeries />}/>
               <Route path="/search" element={<Search/>}/>
               <Route path="/list" element={<WatchlistPage/>}/>
               <Route path="/login" element={<LoginForm />} />

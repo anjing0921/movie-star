@@ -57,7 +57,6 @@ export const FetchContextProvider = (props) => {
         };
 
     const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
-        console.log(viewer_id, watchlist_id, request_body);
         const { data } = await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
@@ -69,7 +68,6 @@ export const FetchContextProvider = (props) => {
         const { data } = await axios.get(
             `${BACK_END_URL}viewers/${viewer_id}/watchlist` ,{ params: parameter }
             );
-        console.log('filtered!', data)
         setWatchList(data);
         getAllWatchList(viewer_id);
     }
@@ -98,7 +96,6 @@ export const FetchContextProvider = (props) => {
             axios.get(       
                 `${BACK_END_URL}viewers/${viewer_id}/watchlist`
             ).then((data) => {
-                console.log('origin!', data.data)
                 setWatchList([...data.data])
             }).catch((err) => {
                 alert(err.response.data.details)
@@ -108,7 +105,7 @@ export const FetchContextProvider = (props) => {
                 `${BACK_END_URL}viewers/${viewer_id}/watchlist`,
                 { params: parameter }
             ).then((data) => {
-                console.log('filtered!', data.data)
+
                 setWatchList([...data.data])
             }).catch((err) => {
                 alert(err.response.data.details)
@@ -116,7 +113,6 @@ export const FetchContextProvider = (props) => {
         }          
         }
 
-    console.log(watchlist)
     const contextValue = {
         watchlist: watchlist,
         genres: genres,

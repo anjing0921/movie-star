@@ -41,10 +41,7 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
     );
 
     setContent(data);
-    //console.log(data.poster_path);
   };
-
-  //console.log(content)
 
   const fetchVideo = async () => {
     const { data } = await axios.get(

@@ -5,8 +5,8 @@ import Genres from "../../components/Genre";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 
-const Movies = () => {
-  const [moviesContent, setMoviesContent] = useState([]);
+const TVSeries = () => {
+  const [seriesContent, setSeriesContent] = useState([]);
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -21,9 +21,9 @@ const genreforURL = getGenreIds(selectedGenres)
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreforURL}`
-    );
-    setMoviesContent(data.results);
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreforURL}`
+      );
+    setSeriesContent(data.results);
   };
 
   useEffect(() => {
@@ -36,21 +36,21 @@ const genreforURL = getGenreIds(selectedGenres)
     <div>   
     <span className='pageTitle'>Classic Movies</span>
     <Genres
-        type="movie"
+        type="tv"
         selectedGenres={selectedGenres}
         setSelectedGenres={setSelectedGenres}
         genres={genres}
         setGenres={setGenres}
     />
     <div className="trending">
-        {moviesContent.map((c) => (
+        {seriesContent.map((c) => (
             <SingleContent
               key={c.id}
               id={c.id}
               poster={c.poster_path}
               title={c.title || c.name}
               date={c.first_air_date || c.release_date}
-              media_type="movie"
+              media_type="tv"
               vote_average={c.vote_average}
               genre_ids={c.genre_ids}
             />
@@ -61,4 +61,4 @@ const genreforURL = getGenreIds(selectedGenres)
   )
 }
 
-export default Movies
+export default TVSeries

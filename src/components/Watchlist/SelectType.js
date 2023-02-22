@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TheatersIcon from '@mui/icons-material/Theaters';
@@ -7,22 +7,18 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 
 export default function SelectType({type, onSetType}) {
-    const [select, setSelect] = useState('');
 
     const selectMoviesHandler = () => {
-        setSelect('movie')
         onSetType('movie')
     };
     const selectTVSeriesHandler= () => {
-        setSelect('tv')
         onSetType('tv')
     };
 
     const resetHandler = () => {
-        setSelect('')
         onSetType('')
     }
-    console.log(select)
+
     return (
         <Box>
             {(type === 'movie')? 
