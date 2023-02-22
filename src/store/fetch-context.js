@@ -10,6 +10,8 @@ const FetchContext = React.createContext({
     onAdd: ()=> {},
     onRemove: ()=> {},
     onUpdate: ()=> {},
+    onSort: ()=> {},
+    onFilter: () => {},
     byGenre: ()=> {},
     getGenres: () => {}
     });
@@ -114,7 +116,7 @@ export const FetchContextProvider = (props) => {
         }          
         }
 
-
+    console.log(watchlist)
     const contextValue = {
         watchlist: watchlist,
         genres: genres,
