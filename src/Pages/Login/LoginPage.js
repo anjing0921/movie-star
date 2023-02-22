@@ -1,18 +1,17 @@
 import React, {useContext} from 'react';
 import AuthContext from '../../store/auth-context';
-import LoginForm from '../Login/LoginForm';
-import Trending from '../Trending/Trending'
+import LoginForm from './LoginForm';
+import Trending from '../Trending/Trending';
 
 
-const LogoutPage = () => {
+const LoginPage = () => {
     const authCtx = useContext(AuthContext)
+    
     return(
         <React.Fragment>
         {!authCtx.isLoggedIn? <LoginForm /> : <Trending />}
         </React.Fragment>
-    ) 
-    
-    
+    )   
 };
 
-export default LogoutPage;
+export default LoginPage;
