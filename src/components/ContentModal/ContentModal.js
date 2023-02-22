@@ -1,16 +1,17 @@
 import * as React from 'react';
-import  { useEffect, useState } from "react";
+import  { useEffect, useState, useContext } from "react";
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-
+import AuthContext from '../../store/auth-context'
 
 import './ContentModal.css'
 import axios from "axios";
 
 import YoutubeButton from '../YoutubeButton';
-import AddonButton from '../AddonButton';
+// import AddonButton from '../AddonButton';
 
 
 const style = {
@@ -27,10 +28,12 @@ const style = {
   p: 4,
 };
 
-export default function ContentModal({children, id, media_type, setWatchList,watchlist}) {
+export default function ContentModal({children, id, media_type, onAddContent}) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
   const [video, setVideo] = useState();
+
+  const authCtx = useContext(AuthContext)
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,10 +44,7 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
     );
 
     setContent(data);
-    //console.log(data.poster_path);
   };
-
-  //console.log(content)
 
   const fetchVideo = async () => {
     const { data } = await axios.get(
@@ -58,6 +58,10 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
     fetchVideo();
     // eslint-disable-next-line
   }, []);
+
+  const addMovieToWatchlist = ()=> {
+    onAddContent()
+  }
 
   return (
     <div>
@@ -94,7 +98,14 @@ export default function ContentModal({children, id, media_type, setWatchList,wat
                     {content.overview}
                   </span>
                   <YoutubeButton video={video}/>
-                  <AddonButton content={content} />
+                  {authCtx.isLoggedIn && 
+                  (<Button
+                    variant="contained"
+                    onClick={addMovieToWatchlist}
+                  >
+                    + Add to watch list
+                  </Button>
+                  )}
                 </div>
               </div>
             </Box>

@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useState} from "react";
 import axios from "axios";
+import { useEffect, useState} from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import './Trending.css';
 import CustomPagination from "../../components/Pagination/CustomPagination";
@@ -20,7 +20,7 @@ const Trending = () => {
     window.scroll(0, 0);
     fetchTrending();
     // eslint-disable-next-line
-  }, []);
+  }, [page]);
 
   return (
     <div>

@@ -24,7 +24,7 @@ const SingleContent = ({
   const fetchCtx = useContext(FetchContext)
 
   
-  const checkHandler = (event) => {    
+  const checkHandler = () => {    
     const request_body ={
       viewer_id: authCtx.token,
       content: {
@@ -40,7 +40,7 @@ const SingleContent = ({
     <>
     <Box>
     <Box>
-    <ContentModal media_type={media_type} id={id} >
+    <ContentModal media_type={media_type} id={id} onAddContent={checkHandler}>
       <Badge  badgeContent={vote_average.toFixed(1)}
             color={vote_average > 6 ? "primary" : "secondary"}
       />

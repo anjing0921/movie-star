@@ -40,28 +40,24 @@ export const FetchContextProvider = (props) => {
     
 
     const addToWatchList = async (viewer_id, request_body) => {
-        const { data } = await axios.post(
+        await axios.post(
             `${BACK_END_URL}watchlist/${viewer_id}/add`,
             request_body
-            );
-            console.log('Added!', data);
+            ).catch((err) => (alert(err.response.data)))
             getAllWatchList(viewer_id)
         };
 
     const deleteFromWatchList = async (viewer_id, watchlist_id) => {
-        const { data } = await axios.delete(
+        await axios.delete(
             `${BACK_END_URL}watchlist/${watchlist_id}`
             )
-            console.log('deleted!', data)
             getAllWatchList(viewer_id)            
         };
 
     const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
-        console.log(viewer_id, watchlist_id, request_body);
-        const { data } = await axios.put(
+        await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
-            console.log('updated!', data)
             getAllWatchList(viewer_id)                 
         }
     
@@ -69,7 +65,6 @@ export const FetchContextProvider = (props) => {
         const { data } = await axios.get(
             `${BACK_END_URL}viewers/${viewer_id}/watchlist` ,{ params: parameter }
             );
-        console.log('filtered!', data)
         setWatchList(data);
         getAllWatchList(viewer_id);
     }
@@ -98,7 +93,6 @@ export const FetchContextProvider = (props) => {
             axios.get(       
                 `${BACK_END_URL}viewers/${viewer_id}/watchlist`
             ).then((data) => {
-                console.log('origin!', data.data)
                 setWatchList([...data.data])
             }).catch((err) => {
                 alert(err.response.data.details)
@@ -108,7 +102,7 @@ export const FetchContextProvider = (props) => {
                 `${BACK_END_URL}viewers/${viewer_id}/watchlist`,
                 { params: parameter }
             ).then((data) => {
-                console.log('filtered!', data.data)
+
                 setWatchList([...data.data])
             }).catch((err) => {
                 alert(err.response.data.details)
@@ -116,7 +110,6 @@ export const FetchContextProvider = (props) => {
         }          
         }
 
-    console.log(watchlist)
     const contextValue = {
         watchlist: watchlist,
         genres: genres,
