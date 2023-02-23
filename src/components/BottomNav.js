@@ -57,13 +57,13 @@ const BottomNav = () => {
                 showLabels
                 style={{ fontWeight: 700 }}
             >
-                <BottomNavigationAction label="Trending" icon={<WhatshotIcon />} />
-                <BottomNavigationAction style ={{fontWeight:700}} label="Movies" icon={<MovieFilterIcon />} />
-                <BottomNavigationAction label="Series" icon={<LiveTvIcon />} />
-                <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler}/>)}
+                <BottomNavigationAction label="Trending" icon={<WhatshotIcon />} style={{fontWeight:700}}/>
+                <BottomNavigationAction label="Movies" icon={<MovieFilterIcon />} style={{fontWeight:700}}/>
+                <BottomNavigationAction label="Series" icon={<LiveTvIcon />} style={{fontWeight:700}}/>
+                <BottomNavigationAction label="Search" icon={<SearchIcon />} style={{fontWeight:700}}/>
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler} style={{fontWeight:700}}/>)}
                 {!authCtx.isLoggedIn && (<BottomNavigationAction label="Login" icon={<LoginIcon />} />)}
-                {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} />)}
+                {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} style={{fontWeight:700}}/>)}
             </BottomNavigation>    
         </Box>
         </ThemeProvider>
