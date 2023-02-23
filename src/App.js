@@ -10,7 +10,6 @@ import LogoutPage from "./Pages/Logout/LogoutPage";
 import Search from "./Pages/Search/Search";
 import WatchlistPage from "./Pages/Watchlist/WatchlistPage";
 import BottomNav from "./components/BottomNav";
-// import FontHeader from "./Pages/FontHeader/FontHeader"
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
     <>
       <BrowserRouter>
         <span>
-          {/* <FontHeader /> */}
           <Header />
         </span>
         <section className="app">
