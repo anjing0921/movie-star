@@ -61,7 +61,7 @@ const ContentCard = ({content}) => {
         >
         <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}> 
             <CardMedia 
-                component="img" sx={{height:140, width:100, flexWrap: 'wrap'}} 
+                component="img" sx={{height:120, width:85, flexWrap: 'wrap'}} 
                 image={`https://image.tmdb.org/t/p/w200${content.poster}`} 
                 alt={`${content.title} Poster`}
             />
