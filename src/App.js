@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
 import TVSeries from "./Pages/TVSeries/TVSeries"
-import LoginForm from "./Pages/Login/LoginForm"
+import LoginPage from "./Pages/Login/LoginPage"
 import LogoutPage from "./Pages/Logout/LogoutPage";
 import Search from "./Pages/Search/Search";
 import WatchlistPage from "./Pages/Watchlist/WatchlistPage";
@@ -27,7 +27,7 @@ function App() {
               <Route path="/series" element={<TVSeries />}/>
               <Route path="/search" element={<Search/>}/>
               <Route path="/list" element={<WatchlistPage/>}/>
-              <Route path="/login" element={<LoginForm />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/logout" element={<LogoutPage />}/>          
             </Routes>                       
           </Container>

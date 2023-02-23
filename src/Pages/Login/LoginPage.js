@@ -6,7 +6,7 @@ import Trending from '../Trending/Trending';
 
 const LoginPage = () => {
     const authCtx = useContext(AuthContext)
-    
+
     return(
         <React.Fragment>
         {!authCtx.isLoggedIn? <LoginForm /> : <Trending />}

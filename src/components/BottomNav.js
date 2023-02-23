@@ -40,6 +40,10 @@ const BottomNav = () => {
 
     },[value, navigate]);
 
+    const loginHandler = () => {
+      authCtx.login(authCtx.token);
+    }
+
     const logoutHandler = () => {
       authCtx.logout();
     }
@@ -62,7 +66,7 @@ const BottomNav = () => {
                 <BottomNavigationAction label="Series" icon={<LiveTvIcon />} style={{fontWeight:700}}/>
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} style={{fontWeight:700}}/>
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="WatchList" icon={<ListIcon />} onClick={WatchlistHandler} style={{fontWeight:700}}/>)}
-                {!authCtx.isLoggedIn && (<BottomNavigationAction label="Login" icon={<LoginIcon />} />)}
+                {!authCtx.isLoggedIn && (<BottomNavigationAction label="Login" icon={<LoginIcon />} onClick={loginHandler} style={{fontWeight:700}} />)}
                 {authCtx.isLoggedIn && (<BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={logoutHandler} style={{fontWeight:700}}/>)}
             </BottomNavigation>    
         </Box>
