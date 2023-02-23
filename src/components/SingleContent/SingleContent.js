@@ -42,7 +42,7 @@ const SingleContent = ({
     <Box>
     <ContentModal media_type={media_type} id={id} onAddContent={checkHandler}>
       <Badge  badgeContent={vote_average.toFixed(1)}
-            color={vote_average > 6 ? "primary" : "secondary"}
+            color={vote_average > 7.5 ? "primary" : (vote_average > 6 ? "warning" : "error")}
       />
       <img
         className="poster"
@@ -50,7 +50,7 @@ const SingleContent = ({
         alt={`${title} Poster`}
       />
       <b className="title">{title}</b>
-      <Rating name="star-rate" value={vote_average / 2 } precision={0.1} readOnly />
+      <Rating className="rate" name="star-rate" value={vote_average / 2 } precision={0.1} readOnly />
       <span className="subTitle">
       {media_type === "tv" ? "TV Series" : "Movie"}
         <span className="subTitle">{date}</span>

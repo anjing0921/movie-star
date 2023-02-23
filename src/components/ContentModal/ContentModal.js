@@ -11,11 +11,8 @@ import './ContentModal.css'
 import axios from "axios";
 
 import YoutubeButton from '../YoutubeButton';
-// import AddonButton from '../AddonButton';
-
 
 const style = {
-  
   position: 'absolute',
   top: '50%',
   left: '50%',

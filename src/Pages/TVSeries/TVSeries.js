@@ -34,7 +34,7 @@ const genreforURL = getGenreIds(selectedGenres)
 
   return (
     <div>   
-    <span className='pageTitle'>Classic Movies</span>
+    <span className='pageTitle'>TV Series</span>
     <Genres
         type="tv"
         selectedGenres={selectedGenres}

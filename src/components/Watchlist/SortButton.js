@@ -4,6 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../../theme';
+
+
 
 export default function SortButton({onSort}) {
   const [sort, setSort] = useState('');
@@ -14,6 +18,7 @@ export default function SortButton({onSort}) {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <Box>
       <FormControl sx={{ minWidth: 150 }}>
         <InputLabel id="sort-label">Sort by</InputLabel>
@@ -24,11 +29,12 @@ export default function SortButton({onSort}) {
           label="sort"
           onChange={handleChange}
         >
-          <MenuItem value={'rate'}>My Heart Rate</MenuItem>
-          <MenuItem value={'date'}>Recent Published</MenuItem>
-          <MenuItem value={'title'}>Title</MenuItem>
+          <MenuItem style={{ fontFamily:'Lato'}} value={'rate'}>My Heart Rate</MenuItem>
+          <MenuItem style={{ fontFamily:'Lato'}} value={'date'}>Recent Published</MenuItem>
+          <MenuItem style={{ fontFamily:'Lato'}} value={'title'}>Title</MenuItem>
         </Select>
       </FormControl>
     </Box>
+    </ThemeProvider>
   );
 }

@@ -58,7 +58,6 @@ export const FetchContextProvider = (props) => {
         await axios.put(
             `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
             )
-            getAllWatchList(viewer_id)                 
         }
     
     const filterWatchlistByGenre = async (viewer_id, parameter) => {
@@ -66,7 +65,6 @@ export const FetchContextProvider = (props) => {
             `${BACK_END_URL}viewers/${viewer_id}/watchlist` ,{ params: parameter }
             );
         setWatchList(data);
-        getAllWatchList(viewer_id);
     }
 
     const HandleSortContents = (value) => {

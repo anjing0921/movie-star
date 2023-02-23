@@ -7,12 +7,16 @@
     background-color: #282c34;
     border-radius: 10px;
     position: relative;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Cabin Sketch';
+    font-family: "Lato";
+    font-size: 15px;
+
   }
+  
   
   .media:hover {
     background-color: white;
-    color: black;
+    color: #282c34;
   }
   
   @media (max-width: 550px) {
@@ -29,6 +33,12 @@
     width: 100%;
     text-align: center;
     font-size: 17px;
+    padding: 8px 0;
+  }
+
+  .rate {
+    display: flex;
+    justify-content: center;
     padding: 8px 0;
   }
   
