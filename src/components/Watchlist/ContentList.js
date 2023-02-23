@@ -29,12 +29,25 @@ const ContentList =() =>{
         contents = [...fetchCtx.watchlist].filter((content)=>content.media_type === type)
     }
 
+    const genreIds = new Set([].concat(...contents.map(c => c.genre_ids)))
+    let genreDict = {}; //{id: name}
+    for (let genre of fetchCtx.genres) {
+        genreDict[genre.id]= genre.name
+    }
+    let allGenres = [{id:0, name:'All'}];
+    for (let genreId of genreIds){
+        allGenres.push({
+            id : genreId,
+            name : genreDict[genreId]
+        }) 
+    }
+    
     return (
         <>
         <Box sx={{display: 'flex', flexDirection: 'row',justifyContent:'space-between'}}>
             <SortButton onSort={HandleSortContents}/>
             <SelectType type={type} onSetType={setType}/>
-            <FilterButton genres={fetchCtx.genres} onFilter={HandleFilterContents}/>
+            <FilterButton genres={allGenres} onFilter={HandleFilterContents}/>
         </Box>
         <List>
             {contents && 

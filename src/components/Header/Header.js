@@ -4,7 +4,9 @@ import "./Header.css";
 const Header = () => {
   return (
     <>
-      <span className="header">⭐ Movie Stars ⭐</span>
+      <span className="header">
+        🎬 movie star ⭐
+      </span>
     </>
   );
 };

@@ -53,7 +53,8 @@ const Genres = ({
         <div style={{ padding: "6px 0" }}>
             {selectedGenres.map((genre) => (
                 <Chip
-                    style={{ margin: 2 }}
+                    // style={{ margin: 2, backgroundColor:'#d6ccc2' }}
+                    sx={{ bgcolor: 'green', color: 'white' }}
                     label={genre.name}
                     key={genre.id}
                     color="primary"
@@ -64,7 +65,7 @@ const Genres = ({
             ))}
             {genres.map((genre) => (
                 <Chip
-                    style={{ margin: 2 }}
+                    style={{ fontFamily:'Lato', margin: 2, backgroundColor:'#6d6875', color:'white'}}
                     label={genre.name}
                     key={genre.id}
                     clickable

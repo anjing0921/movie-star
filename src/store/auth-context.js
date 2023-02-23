@@ -9,7 +9,7 @@ const AuthContext = React.createContext({
     });
 
     export const AuthContextProvider = (props) => {
-    const [token, setToken] = useState(null); 
+    const [token, setToken] = useState(null);
 
     const userIsLoggedIn = !!token;
 
@@ -19,6 +19,7 @@ const AuthContext = React.createContext({
 
     const logoutHandler = () => {
         setToken(null);
+
     };
 
     const contextValue = {
