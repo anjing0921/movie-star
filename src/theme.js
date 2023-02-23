@@ -8,6 +8,9 @@ const theme = createTheme({
         dark: "#1d3557",
         contrastText: "#f5ebe0",
         },
+        secondary:{
+            main: "#6d6875",
+        }
     },
     components: {
             TextField:{

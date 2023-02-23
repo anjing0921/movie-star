@@ -42,7 +42,7 @@ const SingleContent = ({
     <Box>
     <ContentModal media_type={media_type} id={id} onAddContent={checkHandler}>
       <Badge  badgeContent={vote_average.toFixed(1)}
-            color={vote_average > 6 ? "primary" : "secondary"}
+            color={vote_average > 7.5 ? "primary" : (vote_average > 6 ? "warning" : "error")}
       />
       <img
         className="poster"
