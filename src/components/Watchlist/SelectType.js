@@ -24,26 +24,26 @@ export default function SelectType({type, onSetType}) {
         <ThemeProvider theme={theme}>
         <Box >
             {(type === 'movie')? 
-            <Button disabled  variant="contained" startIcon={<TheatersIcon/>} sx={{margin:1}}> 
+            <Button disabled  variant="contained" startIcon={<TheatersIcon/>} sx={{margin:1}} style={{fontFamily:'Lato'}}> 
                 Movies
             </Button>
-            :<Button  style={{fontFamily:'Lato'}} onClick={selectMoviesHandler} variant="contained" startIcon={<TheatersIcon/>} sx={{margin:1}}>
+            :<Button onClick={selectMoviesHandler} variant="contained" startIcon={<TheatersIcon/>} sx={{margin:1}} style={{fontFamily:'Lato'}}>
                 Movies
             </Button>   
             }
             {(type === 'tv')? 
-            <Button disabled variant="contained" startIcon={ <OndemandVideoIcon/>} sx={{margin:1}} >
+            <Button disabled variant="contained" startIcon={ <OndemandVideoIcon/>} sx={{margin:1}} style={{fontFamily:'Lato'}}>
                 TV Series
             </Button>
-            :<Button onClick={selectTVSeriesHandler} variant="contained" startIcon={ <OndemandVideoIcon/>}  sx={{margin:1}}>
+            :<Button onClick={selectTVSeriesHandler} variant="contained" startIcon={ <OndemandVideoIcon/>}  sx={{margin:1}} style={{fontFamily:'Lato'}}>
                 TV Series
             </Button>
             }
             {(type === '')?
-            <Button  disabled onClick={resetHandler} variant="contained" startIcon={ <RestartAltIcon/>}  sx={{margin:1}}>
+            <Button  disabled onClick={resetHandler} variant="contained" startIcon={ <RestartAltIcon/>}  sx={{margin:1}} style={{fontFamily:'Lato'}}>
                 Reset
             </Button>
-            :<Button onClick={resetHandler} variant="contained" startIcon={ <RestartAltIcon/>}  sx={{margin:1}}>
+            :<Button onClick={resetHandler} variant="contained" startIcon={ <RestartAltIcon/>}  sx={{margin:1}} style={{fontFamily:'Lato'}}>
                 Reset
             </Button>
             }   
