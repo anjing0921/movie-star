@@ -22,14 +22,14 @@ export const FetchContextProvider = (props) => {
 
     const getAllWatchList = async (viewer_id) => {
         const { data } = await axios.get(
-            `${BACK_END_URL}viewers/${viewer_id}/watchlist`
+            `${BACK_END_URL}/viewers/${viewer_id}/watchlist`
             );
         setWatchList(data);
         };
     
     const getAllGenres = async (viewer_id) => {
         const { data } = await axios.get(
-            `${BACK_END_URL}genres`
+            `${BACK_END_URL}/genres`
             );
             setGenres(data);
         };
@@ -41,7 +41,7 @@ export const FetchContextProvider = (props) => {
 
     const addToWatchList = async (viewer_id, request_body) => {
         await axios.post(
-            `${BACK_END_URL}watchlist/${viewer_id}/add`,
+            `${BACK_END_URL}/watchlist/${viewer_id}/add`,
             request_body
             ).catch((err) => (alert(err.response.data)))
             getAllWatchList(viewer_id)
@@ -49,20 +49,20 @@ export const FetchContextProvider = (props) => {
 
     const deleteFromWatchList = async (viewer_id, watchlist_id) => {
         await axios.delete(
-            `${BACK_END_URL}watchlist/${watchlist_id}`
+            `${BACK_END_URL}/watchlist/${watchlist_id}`
             )
             getAllWatchList(viewer_id)            
         };
 
     const updateWatchlist = async (viewer_id, watchlist_id, request_body) => {
         await axios.put(
-            `${BACK_END_URL}watchlist/${watchlist_id}`, request_body         
+            `${BACK_END_URL}/watchlist/${watchlist_id}`, request_body         
             )
         }
     
     const filterWatchlistByGenre = async (viewer_id, parameter) => {
         const { data } = await axios.get(
-            `${BACK_END_URL}viewers/${viewer_id}/watchlist` ,{ params: parameter }
+            `${BACK_END_URL}/viewers/${viewer_id}/watchlist` ,{ params: parameter }
             );
         setWatchList(data);
     }
@@ -89,7 +89,7 @@ export const FetchContextProvider = (props) => {
         const viewer_id = id;
         if (value === 0){
             axios.get(       
-                `${BACK_END_URL}viewers/${viewer_id}/watchlist`
+                `${BACK_END_URL}/viewers/${viewer_id}/watchlist`
             ).then((data) => {
                 setWatchList([...data.data])
             }).catch((err) => {
@@ -97,7 +97,7 @@ export const FetchContextProvider = (props) => {
             });
         } else{
             axios.get(       
-                `${BACK_END_URL}viewers/${viewer_id}/watchlist`,
+                `${BACK_END_URL}/viewers/${viewer_id}/watchlist`,
                 { params: parameter }
             ).then((data) => {
 
